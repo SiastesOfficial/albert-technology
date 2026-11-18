@@ -13,7 +13,7 @@ export default function FadeUp() {
 
   useGSAP(
     () => {
-      gsap.utils.toArray("[data-highlight]").forEach((el) => {
+      gsap.utils.toArray<HTMLElement>("[data-highlight]").forEach((el) => {
         SplitText.create(el, {
           type: "words",
           autoSplit: true, // re-splits on resize and font load
