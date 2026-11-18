@@ -6,11 +6,12 @@ import { Lottie } from "lottie-react";
 import animationData from "../../public/albert.json";
 import FadeUp from "../component/fade-up";
 import Service from "../component/service";
+import Call from "../component/call";
 
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center  font-sans -z-10 ">
-      <main className="flex flex-1 w-full 2xl:max-w-7xl max-w-4xl flex-col items-center justify-between py-16 md:px-16   sm:items-start">
+      <main className="flex flex-1 w-full 2xl:max-w-7xl max-w-4xl flex-col items-center justify-between pt-16 md:px-16   sm:items-start">
         <Background />
         <div className="w-full h-[80vh] flex flex-col items-center ">
           <div className="w-full h-full overflow-hidden  hidden md:block relative">
@@ -57,6 +58,7 @@ export default function Home() {
         <div className="w-full  bg-black md:bg-white  ">
           <FadeUp />
           <Service/>
+          <Call/>
         </div>
         {/* main profile */}
       </main>
