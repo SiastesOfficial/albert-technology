@@ -230,7 +230,7 @@ export function BookingFlow({ session }: { session: Session }) {
           </div>
 
           <div className="flex flex-1 flex-col lg:pt-10 ">
-            <div className="flex-1 px-6 pb-10 pt-10 lg:p-0">
+            <div className="flex-1 px-6 pb-14 pt-10 lg:p-0">
               <h2
                 ref={headingRef}
                 tabIndex={-1}
@@ -270,7 +270,7 @@ export function BookingFlow({ session }: { session: Session }) {
               </div>
             </div>
 
-            <footer className="sticky bottom-0 border-t border-white/10 bg-[#1e1e1e] px-6 py-5 md:border-black/10 md:bg-neutral-100 lg:bottom-6 lg:mb-8 lg:rounded-3xl lg:border">
+            <footer className="sticky bottom-0 border-t border-white/10 bg-[#1e1e1e] px-6 py-5  md:border-black/10 md:bg-neutral-100 lg:bottom-6 lg:mb-8 lg:rounded-3xl lg:border">
               <div className="mx-auto flex max-w-md flex-col gap-3 lg:max-w-none">
                 <div className="flex gap-3">
                   {step > 0 && (

@@ -57,7 +57,7 @@ const socials = [
 export default function Footer() {
   return (
     <footer
-      className={`border-t bg-black text-[#f5f5f7] md:bg-white md:text-[#1d1d1f] ${HAIRLINE}`}
+      className={`border-t bg-black text-[#f5f5f7] md:bg-white md:text-[#1d1d1f]  md:mt-24 ${HAIRLINE}`}
     >
       <div className="mx-auto max-w-5xl px-6 pb-8 pt-16 md:pt-20">
         <div className={`flex flex-col gap-3 border-b pb-10 ${HAIRLINE} items-start`}>

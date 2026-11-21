@@ -56,7 +56,7 @@ export default function Companies() {
       </ul>
       <div className="my-4">
         <Link
-          href="/session"
+          href="/business"
           className=" py-3 text-accent-pink border border-accent-pink px-8 font-bold text-xl rounded-full  cursor-pointer"
         >
           Read more
