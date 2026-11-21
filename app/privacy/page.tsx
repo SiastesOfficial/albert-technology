@@ -4,7 +4,7 @@ import {
   LegalPage,
   Mail,
   type LegalSection,
-} from "@/app/legal/page";
+} from "@/app/legal/legal";
 
 
 
