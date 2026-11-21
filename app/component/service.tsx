@@ -7,26 +7,46 @@ type ServiceItem = { title: string; body: ReactNode };
 
 const services: ServiceItem[] = [
   {
-    title: "Modernize Infrastructure",
+    title: "Start Your Business",
     body: (
       <>
-        Legacy systems slow every decision. I assess what you have, retire what
-        holds you back, and build a foundation that scales as your{" "}
-        <span className="text-accent-pink">assets</span> do.
+        Every lasting business begins on{" "}
+        <span className="text-accent-pink">solid ground</span>. I help you turn
+        an idea into a plan, sharpen your offer, and take the first steps with
+        clarity, not guesswork.
       </>
     ),
   },
   {
-    title: "Streamline Your Data",
-    body: "Scattered data means slower reporting and weaker insight. I connect your sources into clean workflows, so your team spends its time on decisions, not reconciliation.",
+    title: "Grow Your Business",
+    body: (
+      <>
+        Growth takes <span className="text-accent-pink">wisdom</span>, not just
+        effort. I find what is holding you back, build the strategy and systems
+        to scale, and stay with you until it works.
+      </>
+    ),
   },
   {
-    title: "Build Your Tech Strategy",
-    body: "No templates. I work directly with leadership to shape a roadmap around your firm, your clients, and your growth targets, then stay to see it delivered.",
+    title: "Invest and Trade Wisely",
+    body: (
+      <>
+        Know where your money goes to work. I teach you how professionals think
+        about <span className="text-accent-pink">risk and return</span>,
+        whether you trade as an institution or as a retail trader.
+      </>
+    ),
   },
   {
-    title: "Prepare for Fintech & Blockchain",
-    body: "Digital assets and new financial technology are reshaping the industry. I help your leadership understand what matters, what doesn't, and how to move first.",
+    title: "Grow Your Spirit Man",
+    body: (
+      <>
+        A business is carried by the person behind it. I help you anchor your
+        decisions, your rhythm, and your life in{" "}
+        <span className="text-accent-pink">faith</span>, so your growth never
+        costs you your peace.
+      </>
+    ),
   },
 ];
 

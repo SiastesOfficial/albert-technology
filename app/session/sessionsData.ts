@@ -15,16 +15,18 @@ export const INCLUDED = [
   "Clear, direct guidance with next steps",
 ] as const;
 
-export const priceFor = (minutes: Minutes) => (RATE_PER_HOUR * minutes) / 60;
-
-export const formatPrice = (usd: number) => `$${usd.toLocaleString("en-US")}`;
-
 export type Session = {
   slug: string;
   title: string;
   summary: string;
   audience: string;
   note?: string;
+  rate?: number;
+  lengths?: readonly Minutes[];
+  slots?: readonly string[];
+  availability?: string;
+  scheduleNote?: string;
+  included?: readonly string[];
   situation: {
     heading: string;
     intro: string;
@@ -32,9 +34,21 @@ export type Session = {
     issuePlaceholder: string;
     contextLabel: string;
     contextOptions: readonly string[];
+    triedLabel?: string;
     triedPlaceholder: string;
   };
 };
+
+export const priceFor = (session: Session, minutes: Minutes) =>
+  ((session.rate ?? RATE_PER_HOUR) * minutes) / 60;
+
+export const lengthsFor = (session: Session) =>
+  LENGTHS.filter(({ minutes }) => session.lengths?.includes(minutes) ?? true);
+
+export const timeSlotsFor = (session: Session): readonly string[] =>
+  session.slots ?? TIME_SLOTS;
+
+export const formatPrice = (usd: number) => `$${usd.toLocaleString("en-US")}`;
 
 export const sessions: Session[] = [
   {
@@ -136,6 +150,44 @@ export const sessions: Session[] = [
       ],
       triedPlaceholder:
         "Savings accounts, funds, property, trading, or nothing yet.",
+    },
+  },
+  {
+    slug: "prophetic-and-dream-interpretation",
+    title: "Prophetic and Dream Interpretation",
+    summary:
+      "Bring the dream, the word, or the season you cannot make sense of. Receive prophetic insight, interpretation, and clear next steps.",
+    audience:
+      "For believers seeking clarity on a dream, a word, or a season they are in.",
+    note: "Spiritual guidance offered in faith. It is not medical, legal or financial advice.",
+    rate: 700,
+    lengths: [60],
+    slots: ["12:00 AM ET", "1:00 AM ET", "2:00 AM ET", "3:00 AM ET"],
+    availability: "Calls are held after midnight ET",
+    scheduleNote:
+      "These calls take place after midnight Eastern Time (ET), and the day you choose is the day in Eastern Time. Check what that is in your own timezone before you book.",
+    included: [
+      "A live video session with Albert",
+      "Prophetic insight and interpretation of your dream or word",
+      "Clear, direct guidance with next steps",
+    ],
+    situation: {
+      heading: "What are you seeking clarity on?",
+      intro:
+        "Share the dream, the word, or the season you are in, as plainly as you can. I read this before we start, so we spend the session on interpretation and direction, not recap.",
+      issueLabel: "What do you need clarity on?",
+      issuePlaceholder:
+        "Describe the dream or word in as much detail as you remember, and what you are asking God about.",
+      contextLabel: "What are you bringing?",
+      contextOptions: [
+        "A dream",
+        "A word I received",
+        "A decision I'm facing",
+        "A season I'm in",
+      ],
+      triedLabel: "What have you already done with it?",
+      triedPlaceholder:
+        "Prayer, fasting, counsel from your pastor, journaling, or nothing yet.",
     },
   },
 ];

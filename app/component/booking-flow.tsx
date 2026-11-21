@@ -12,11 +12,10 @@ import {
 
 import {
   INCLUDED,
-  LENGTHS,
-  RATE_PER_HOUR,
-  TIME_SLOTS,
   formatPrice,
+  lengthsFor,
   priceFor,
+  timeSlotsFor,
   type Minutes,
   type Session,
 } from "../session/sessionsData";
@@ -79,12 +78,19 @@ const canContinue = (step: number, booking: Booking) => {
 };
 
 const stepCopy = (step: number, session: Session) => {
+  const lengths = lengthsFor(session);
+  const hasChoice = lengths.length > 1;
+
   switch (step) {
     case 0:
       return {
         heading: "One live session, spent on the real issue.",
         intro: [
-          "Your consultation is one live video session with Albert, 60 or 120 minutes, whichever you pick on the last step. Everything you share here is read before we start, so the session opens on the real issue instead of the background.",
+          `Your consultation is one live video session with Albert, ${
+            hasChoice
+              ? "60 or 120 minutes, whichever you pick on the last step"
+              : `${lengths[0].minutes} minutes`
+          }. Everything you share here is read before we start, so the session opens on the real issue instead of the background.`,
           "Thank you, and I look forward to helping you move forward.",
         ],
       };
@@ -98,21 +104,30 @@ const stepCopy = (step: number, session: Session) => {
         heading: "Choose a time that suits you.",
         intro: [
           "Pick a day and a start time. Once payment is confirmed, you'll receive a calendar invite and your video link by email.",
+          ...(session.scheduleNote ? [session.scheduleNote] : []),
         ],
       };
     default:
-      return {
-        heading: "Choose your session length.",
-        intro: [
-          "Sixty minutes is enough for one clear issue. Take two hours if you want to go deeper and leave with a plan for each part.",
-        ],
-      };
+      return hasChoice
+        ? {
+            heading: "Choose your session length.",
+            intro: [
+              "Sixty minutes is enough for one clear issue. Take two hours if you want to go deeper and leave with a plan for each part.",
+            ],
+          }
+        : {
+            heading: "Confirm your session.",
+            intro: ["Check your details below, then continue to secure payment."],
+          };
   }
 };
 
 export function BookingFlow({ session }: { session: Session }) {
   const [step, setStep] = useState(0);
-  const [booking, setBooking] = useState(emptyBooking);
+  const [booking, setBooking] = useState<Booking>(() => ({
+    ...emptyBooking,
+    minutes: lengthsFor(session)[0].minutes,
+  }));
   const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
   const headingRef = useRef<HTMLHeadingElement>(null);
   const previousStep = useRef(step);
@@ -155,7 +170,7 @@ export function BookingFlow({ session }: { session: Session }) {
   };
 
   return (
-    <main className="relative md:mt-10 min-h-dvh bg-black text-white md:bg-white md:text-black ">
+    <main className="relative z-30 min-h-dvh bg-black text-white md:bg-white md:text-black">
       <div className="mx-auto flex min-h-dvh max-w-5xl flex-col">
         <header className="px-6 pt-8 lg:pt-12">
           <div className="flex items-start justify-between gap-4">
@@ -210,11 +225,11 @@ export function BookingFlow({ session }: { session: Session }) {
           onSubmit={onSubmit}
           className="flex flex-1 flex-col lg:grid lg:grid-cols-[22rem_minmax(0,1fr)] lg:gap-16 lg:px-6"
         >
-          <div className="px-6 pt-8 lg:sticky lg:top-8 lg:self-start lg:p-0 lg:pt-10">
+          <div className="px-6 pt-8  lg:sticky lg:top-8 lg:self-start lg:p-0 lg:pt-10">
             <SessionSummary session={session} />
           </div>
 
-          <div className="flex flex-1 flex-col lg:pt-10">
+          <div className="flex flex-1 flex-col lg:pt-10 ">
             <div className="flex-1 px-6 pb-10 pt-10 lg:p-0">
               <h2
                 ref={headingRef}
@@ -238,12 +253,24 @@ export function BookingFlow({ session }: { session: Session }) {
                     session={session}
                   />
                 )}
-                {step === 2 && <StepTime booking={booking} update={update} />}
-                {step === 3 && <StepLength booking={booking} update={update} />}
+                {step === 2 && (
+                  <StepTime
+                    booking={booking}
+                    update={update}
+                    session={session}
+                  />
+                )}
+                {step === 3 && (
+                  <StepLength
+                    booking={booking}
+                    update={update}
+                    session={session}
+                  />
+                )}
               </div>
             </div>
 
-            <footer className="sticky bottom-0 border-t border-white/10 bg-[#1e1e1e] px-6 py-8 md:border-black/10 md:bg-neutral-100 lg:bottom-6 lg:mb-8 lg:rounded-3xl lg:border">
+            <footer className="sticky bottom-0 border-t border-white/10 bg-[#1e1e1e] px-6 py-5 md:border-black/10 md:bg-neutral-100 lg:bottom-6 lg:mb-8 lg:rounded-3xl lg:border">
               <div className="mx-auto flex max-w-md flex-col gap-3 lg:max-w-none">
                 <div className="flex gap-3">
                   {step > 0 && (
@@ -258,7 +285,7 @@ export function BookingFlow({ session }: { session: Session }) {
                   <button
                     type="submit"
                     disabled={!ready || status === "loading"}
-                    className={`flex-1 rounded-full border py-1.5 text-balance md:py-4 font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 ${
+                    className={`flex-1 rounded-full border py-4 font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 ${
                       isLast
                         ? "border-white bg-white text-black enabled:hover:bg-white/85 md:border-black md:bg-black md:text-white md:enabled:hover:bg-black/85"
                         : "border-white/60 enabled:hover:bg-white enabled:hover:text-black md:border-black/60 md:enabled:hover:bg-black md:enabled:hover:text-white"
@@ -267,7 +294,7 @@ export function BookingFlow({ session }: { session: Session }) {
                     {isLast
                       ? status === "loading"
                         ? "Redirecting…"
-                        : `Continue to payment  ${formatPrice(priceFor(booking.minutes))}`
+                        : `Continue to payment · ${formatPrice(priceFor(session, booking.minutes))}`
                       : "Continue"}
                   </button>
                 </div>
@@ -292,6 +319,8 @@ export function BookingFlow({ session }: { session: Session }) {
 }
 
 function SessionSummary({ session }: { session: Session }) {
+  const lengths = lengthsFor(session);
+
   return (
     <aside
       aria-label="Session summary"
@@ -300,7 +329,9 @@ function SessionSummary({ session }: { session: Session }) {
       <p className={`text-sm ${MUTED}`}>Consultation call</p>
       <p className="mt-1 text-xl font-semibold">{session.title}</p>
       <p className="mt-1 text-sm text-white/70 md:text-black/70">
-        {`From ${formatPrice(RATE_PER_HOUR)} · 60 or 120 minutes`}
+        {`${lengths.length > 1 ? "From " : ""}${formatPrice(
+          priceFor(session, lengths[0].minutes),
+        )} · ${lengths.map(({ minutes }) => minutes).join(" or ")} minutes`}
       </p>
       <p className={`mt-3 text-sm ${MUTED}`}>{session.audience}</p>
 
@@ -308,7 +339,7 @@ function SessionSummary({ session }: { session: Session }) {
 
       <p className="font-semibold">Includes</p>
       <ul className="mt-3 space-y-3 pr-10">
-        {INCLUDED.map((item) => (
+        {(session.included ?? INCLUDED).map((item) => (
           <li key={item} className="flex items-start gap-3 text-sm">
             <Image
               src="/check-w.svg"
@@ -417,7 +448,10 @@ function StepSituation({
         value={booking.context}
         onChange={(value) => update("context", value)}
       />
-      <Field label="What have you already tried?" optional>
+      <Field
+        label={situation.triedLabel ?? "What have you already tried?"}
+        optional
+      >
         <textarea
           className={`${FIELD} field-sizing-content min-h-16 resize-none`}
           value={booking.tried}
@@ -429,7 +463,11 @@ function StepSituation({
   );
 }
 
-function StepTime({ booking, update }: StepProps) {
+function StepTime({
+  booking,
+  update,
+  session,
+}: StepProps & { session: Session }) {
   const today = new Date().toLocaleDateString("en-CA");
 
   return (
@@ -447,7 +485,7 @@ function StepTime({ booking, update }: StepProps) {
       <ChipGroup
         legend="Start time"
         name="time"
-        options={TIME_SLOTS}
+        options={timeSlotsFor(session)}
         value={booking.time}
         onChange={(value) => update("time", value)}
       />
@@ -455,7 +493,11 @@ function StepTime({ booking, update }: StepProps) {
   );
 }
 
-function StepLength({ booking, update }: StepProps) {
+function StepLength({
+  booking,
+  update,
+  session,
+}: StepProps & { session: Session }) {
   const day = new Date(`${booking.date}T00:00:00`).toLocaleDateString(
     undefined,
     { weekday: "long", day: "numeric", month: "long" },
@@ -466,7 +508,7 @@ function StepLength({ booking, update }: StepProps) {
       <fieldset>
         <legend className="sr-only">Session length</legend>
         <div className="space-y-3">
-          {LENGTHS.map(({ minutes, note }) => (
+          {lengthsFor(session).map(({ minutes, note }) => (
             <label key={minutes} className="block">
               <input
                 type="radio"
@@ -483,7 +525,7 @@ function StepLength({ booking, update }: StepProps) {
                   <p className={`mt-1 text-sm ${MUTED}`}>{note}</p>
                 </div>
                 <p className="text-2xl font-extrabold">
-                  {formatPrice(priceFor(minutes))}
+                  {formatPrice(priceFor(session, minutes))}
                 </p>
               </div>
             </label>

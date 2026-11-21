@@ -9,7 +9,6 @@ import {
   type Session as SessionData,
 } from "./sessionsData";
 
-
 export default function Session() {
   return (
     <section
@@ -18,10 +17,10 @@ export default function Session() {
     >
       <h2 className="text-center text-[32px] font-bold leading-12 md:text-6xl md:leading-tight">
         <span className="text-[52px] font-bold italic text-accent-pink md:text-6xl">
-          Session is,
+          One session
         </span>
         <br />
-        all that you need
+        away from freedom
       </h2>
 
       <p className="mt-8 max-w-xl text-balance text-center text-xl text-black/70 max-sm:text-white/70 md:text-2xl">
@@ -38,7 +37,7 @@ export default function Session() {
         </span>
       </p>
 
-      <ul className="mt-12 grid w-full max-w-7xl gap-6 px-4 sm:grid-cols-2 xl:grid-cols-4">
+      <ul className="mt-12 grid w-full max-w-5xl gap-6 px-4 sm:grid-cols-2 xl:grid-cols-3">
         {sessions.map((session) => (
           <li key={session.slug}>
             <SessionCard session={session} />
@@ -46,29 +45,31 @@ export default function Session() {
         ))}
       </ul>
 
-      <ul className="mt-16 flex w-full max-w-4xl flex-col gap-4 max-sm:px-4 md:flex-row md:justify-between">
-        {INCLUDED.map((item) => (
-          <li key={item} className="flex items-start gap-3 md:max-w-70">
-            <Image
-              src="/check.svg"
-              width={24}
-              height={24}
-              alt=""
-              className="hidden md:block"
-            />
-            <Image
-              src="/check-w.svg"
-              width={24}
-              height={24}
-              alt=""
-              className="md:hidden"
-            />
-            <span className="text-black/80 max-sm:text-white/80 md:text-lg">
-              {item}
-            </span>
-          </li>
-        ))}
-      </ul>
+      <div className="flex items-center justify-center">
+        <ul className="mt-16 flex flex-col w-full   gap-4  ">
+          {INCLUDED.map((item) => (
+            <li key={item} className="flex items-start gap-3 ">
+              <Image
+                src="/check.svg"
+                width={24}
+                height={24}
+                alt=""
+                className="hidden md:block"
+              />
+              <Image
+                src="/check-w.svg"
+                width={24}
+                height={24}
+                alt=""
+                className="md:hidden"
+              />
+              <span className="text-black/80 max-sm:text-white/80 md:text-lg">
+                {item}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }

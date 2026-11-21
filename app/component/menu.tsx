@@ -8,7 +8,7 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP);
 
-const links = ["Home", "Session"];
+const links = ["Home", "Business", "Prophetechnology", "Appointment"];
 
 export default function Menu() {
   const menu = useBoundStore((state) => state.menu);

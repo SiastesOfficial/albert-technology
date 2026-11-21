@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type Company = {
   name: string;
@@ -53,6 +54,14 @@ export default function Companies() {
           </li>
         ))}
       </ul>
+      <div className="my-4">
+        <Link
+          href="/session"
+          className=" py-3 text-accent-pink border border-accent-pink px-8 font-bold text-xl rounded-full  cursor-pointer"
+        >
+          Read more
+        </Link>
+      </div>
     </section>
   );
 }

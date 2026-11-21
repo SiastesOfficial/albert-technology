@@ -27,22 +27,18 @@ export default function Home() {
               />
               <Image
                 src="/grow.svg"
-                width={700}
+                width={800}
                 height={300}
                 alt="hero text"
                 className="xl:block hidden"
               />
             </div>
             <div className=" w-full   flex flex-col items-center mt-8">
-              <p className="md:w-[80%] xl:w-[70%] pb-4 text-2xl text-black  text-center ">
-                I help asset management firms break free from legacy bottlenecks
-                and scale with confidence. Through Albert Technology, I partner
-                directly with leadership to modernize infrastructure, streamline
-                data workflows, and build bespoke tech strategies that drive
-                real AUM growth.
+              <p className="md:w-[80%] xl:w-[70%]  text-2xl text-black  text-center ">
+                I help founders and leaders start businesses on solid ground, grow them with wisdom, and stay anchored in faith while they do it. With over a decade in finance across the UK, US, and Canada, I bring practical strategy to the work of building, and the conviction that the person behind the business matters as much as the business itself.
               </p>
             </div>
-            <div className="flex gap-2 justify-center items-center mb-4 mt-4">
+            <div className="flex gap-2 justify-center items-center mt-6">
               <Link
                 href="/session"
                 className=" py-3 text-accent-pink border border-accent-pink px-8 font-bold text-xl rounded-full  cursor-pointer"
@@ -64,14 +60,13 @@ export default function Home() {
           </div>
           {/* small device */}
           <div className=" md:hidden flex flex-col items-center ">
-            <h1 className="text-white mt-64 text-[68px] text-center font-light leading-16">
-              <span className="text-[56px] font-bold ">Grow your </span> <br />
-              business
+            <h1 className="text-white mt-64 text-[68px] text-center font-light leading-0">
+              <span className="text-[56px] font-extralight leading-16 ">Start and</span> <br />
+              <span className="font-semibold leading-16">Grow in</span> <br /> <span className="font-black text-[110px] pt-2 leading-28">Faith</span>
             </h1>
             <div className="w-[80%] text-center   mt-6">
               <p className="text-white/70">
-                I help asset managers replace legacy bottlenecks with technology
-                that drives AUM growth.
+               I help founders start strong, grow wisely, and build the spirit man behind the business.
               </p>
             </div>
             <div className="flex justify-center gap-4 items-center w-full mt-10 ">

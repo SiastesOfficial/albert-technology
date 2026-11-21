@@ -12,6 +12,7 @@ const credentials = [
   { value: "10+ years", label: "in finance" },
   { value: "UK · US · Canada", label: "where he has worked" },
   { value: "TD Bank · Barclays", label: "institutions" },
+    { value: "9years", label: "prophetic" },
 ];
 
 export default function FadeUp() {
@@ -73,10 +74,14 @@ export default function FadeUp() {
           institutional trader and five as an analyst, at institutions including
           TD Bank and Barclays. He studied at the University of Westminster,
           UCL, and the University of Toronto, earning a BSc and MSc in Finance
-          and a master&apos;s in fintech. Today, as the founder of{" "}
-          <span className="font-bold text-accent-pink">Siastes AI</span>, he
-          helps people start and grow their businesses, and guides them on where
-          to invest.
+          and a master&apos;s in fintech, and trained at two prophetic ministry
+          schools in Atlanta, Georgia, USA. Today, he is the founder of{" "}
+          <span className="font-bold text-accent-pink">Siastes Group</span> and{" "}
+          <span className="font-bold text-accent-pink">
+            Home of Rapha Church
+          </span>
+          . He helps people start and grow their businesses and grow in spirit,
+          and guides them on where to invest.
         </p>
 
         <p
@@ -91,7 +96,7 @@ export default function FadeUp() {
 
         <dl
           data-credentials
-          className="mt-16 grid grid-cols-2 gap-x-6 gap-y-10 border-t border-white/15 pt-10 md:mt-20 lg:grid-cols-3 md:border-black/15"
+          className="mt-16 grid grid-cols-2 gap-x-6 gap-y-10 border-t border-white/15 pt-10 md:mt-20 lg:grid-cols-4 md:border-black/15"
         >
           {credentials.map(({ value, label }) => (
             <div
