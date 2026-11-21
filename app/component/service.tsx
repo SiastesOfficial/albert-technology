@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
 type ServiceItem = { title: string; body: ReactNode };
 
@@ -30,25 +30,42 @@ const services: ServiceItem[] = [
   },
 ];
 
+const DESKTOP_QUERY = "(min-width: 1024px)";
+
 export default function Service() {
   const track = useRef<HTMLUListElement>(null);
   const drag = useRef({ startX: 0, startLeft: 0 });
   const [active, setActive] = useState(0);
+  const [perView, setPerView] = useState(1);
   const [dragging, setDragging] = useState(false);
+
+  useEffect(() => {
+    const query = window.matchMedia(DESKTOP_QUERY);
+    const sync = () => setPerView(query.matches ? 3 : 1);
+    sync();
+    query.addEventListener("change", sync);
+    return () => query.removeEventListener("change", sync);
+  }, []);
+
+  const pages = services.length - perView + 1;
+  const current = Math.min(active, pages - 1);
 
   const step = () => {
     const items = track.current?.children;
     if (!items || items.length < 2) return 1;
-    return (items[1] as HTMLElement).offsetLeft - (items[0] as HTMLElement).offsetLeft;
+    return (
+      (items[1] as HTMLElement).offsetLeft - (items[0] as HTMLElement).offsetLeft
+    );
   };
 
   const goTo = (index: number) => {
-    const next = Math.min(Math.max(index, 0), services.length - 1);
+    const next = Math.min(Math.max(index, 0), pages - 1);
     track.current?.scrollTo({ left: next * step(), behavior: "smooth" });
   };
 
   const onScroll = () => {
-    if (track.current) setActive(Math.round(track.current.scrollLeft / step()));
+    if (!track.current) return;
+    setActive(Math.round(track.current.scrollLeft / step()));
   };
 
   const onPointerDown = (e: React.PointerEvent) => {
@@ -60,14 +77,15 @@ export default function Service() {
 
   const onPointerMove = (e: React.PointerEvent) => {
     if (!dragging || !track.current) return;
-    track.current.scrollLeft = drag.current.startLeft - (e.clientX - drag.current.startX);
+    track.current.scrollLeft =
+      drag.current.startLeft - (e.clientX - drag.current.startX);
   };
 
   const onPointerUp = () => setDragging(false);
 
   return (
-    <section className="my-24 flex w-full min-w-0 max-w-full flex-col items-center text-white relative z-20">
-      <p className="rounded-full border border-dashed border-white/30 p-4 px-6 text-lg text-white/70">
+    <section className="relative z-20 my-24 flex w-full min-w-0 max-w-full flex-col items-center text-white">
+      <p className="rounded-full border border-dashed border-white/30 p-4 px-6 text-lg text-white/70 md:border-black/30 md:text-black/70">
         ways I help you grow.
       </p>
 
@@ -78,11 +96,17 @@ export default function Service() {
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         onPointerCancel={onPointerUp}
-        className={`my-12 flex w-full min-w-0 gap-4 overflow-x-auto px-[calc((100vw-min(80vw,28rem))/2)] scrollbar-none [&::-webkit-scrollbar]:hidden ${
-          dragging ? "cursor-grabbing select-none" : "cursor-grab snap-x snap-mandatory"
-        }`}>
+        className={`my-12 flex w-full min-w-0 gap-4 overflow-x-auto px-[calc((100%-min(80vw,28rem))/2)] scrollbar-none md:px-[calc((100%-min(80vw,24rem))/2)] lg:w-[min(calc(100%-4rem),72rem)] lg:gap-6 lg:px-0 [&::-webkit-scrollbar]:hidden ${
+          dragging
+            ? "cursor-grabbing select-none snap-none"
+            : "cursor-grab snap-x snap-mandatory"
+        }`}
+      >
         {services.map((service, i) => (
-          <li key={service.title} className="w-[min(80vw,28rem)] shrink-0 snap-center">
+          <li
+            key={service.title}
+            className="w-[min(80vw,28rem)] shrink-0 snap-center md:w-[min(80vw,24rem)] lg:w-[calc((100%-3rem)/3)] lg:snap-start"
+          >
             <Card index={i + 1} {...service} />
           </li>
         ))}
@@ -90,34 +114,40 @@ export default function Service() {
 
       <div className="flex items-center gap-4">
         <button
-          onClick={() => goTo(active - 1)}
-          disabled={active === 0}
+          onClick={() => goTo(current - 1)}
+          disabled={current === 0}
           aria-label="Previous service"
-          className="size-10 rounded-full border border-white/30 transition disabled:opacity-30 pointer-events-auto"
+          className="pointer-events-auto size-10 rounded-full border border-white/30 transition disabled:opacity-30 md:border-black/30 md:text-black"
         >
           ←
         </button>
 
-        <div className="flex items-center gap-2" role="tablist" aria-label="Services">
-          {services.map((service, i) => (
+        <div
+          className="flex items-center gap-2"
+          role="tablist"
+          aria-label="Services"
+        >
+          {Array.from({ length: pages }, (_, i) => (
             <button
-              key={service.title}
+              key={services[i].title}
               role="tab"
-              aria-selected={i === active}
-              aria-label={service.title}
+              aria-selected={i === current}
+              aria-label={`Show ${services[i].title}`}
               onClick={() => goTo(i)}
               className={`h-2 rounded-full transition-all duration-300 ${
-                i === active ? "w-6 bg-white" : "w-2 bg-white/30"
+                i === current
+                  ? "w-6 bg-white md:bg-black"
+                  : "w-2 bg-white/30 md:bg-black/30"
               }`}
             />
           ))}
         </div>
 
         <button
-          onClick={() => goTo(active + 1)}
-          disabled={active === services.length - 1}
+          onClick={() => goTo(current + 1)}
+          disabled={current === pages - 1}
           aria-label="Next service"
-          className="size-10 rounded-full border border-white/30 transition disabled:opacity-30 pointer-events-auto"
+          className="pointer-events-auto size-10 cursor-pointer rounded-full border border-white/30 transition disabled:opacity-30 md:border-black/30 md:text-black"
         >
           →
         </button>
@@ -127,12 +157,27 @@ export default function Service() {
 }
 
 const Card = ({ index, title, body }: ServiceItem & { index: number }) => (
-  <div className="relative h-110 w-full overflow-hidden rounded-4xl border border-[#4D4C4C] p-8 py-12">
+  <div className="relative h-110 w-full overflow-hidden rounded-4xl border border-[#4D4C4C] p-8 py-12 md:h-130 md:rounded-[3rem] lg:h-140">
     <div className="absolute bottom-2 right-1">
-      <Image src="/clover-leaf.svg" width={150} height={60} alt="" />
+      <Image
+        src="/clover-leaf.svg"
+        width={150}
+        height={60}
+        alt=""
+        className="md:hidden"
+      />
+      <Image
+        src="/clover-leaf-black.svg"
+        width={200}
+        height={60}
+        alt=""
+        className="hidden md:block"
+      />
     </div>
-    <span className="text-white/40 text-lg">0{index}</span>
-    <h3 className="mt-2 text-3xl font-semibold text-balance">{title}</h3>
-    <p className="mt-6">{body}</p>
+    <span className="text-lg text-white/40 md:text-black/40">0{index}</span>
+    <h3 className="mt-2 text-balance text-3xl font-semibold hover:text-accent-pink md:mt-6 md:text-4xl md:text-black lg:text-3xl xl:text-4xl">
+      {title}
+    </h3>
+    <p className="mt-6 md:mt-8 md:text-lg md:text-black">{body}</p>
   </div>
 );

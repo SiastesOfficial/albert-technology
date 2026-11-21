@@ -8,7 +8,7 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(useGSAP);
 
-const links = ["Home", "Courses", "Dashboard"];
+const links = ["Home", "Session"];
 
 export default function Menu() {
   const menu = useBoundStore((state) => state.menu);
@@ -47,7 +47,7 @@ export default function Menu() {
   return (
     <div
       ref={containerRef}
-      className={`w-full h-screen fixed flex flex-col items-center bg-black text-white menu z-50 left-0 top-0 ${
+      className={`w-full h-screen fixed flex flex-col items-center bg-black text-white menu z-50 left-0 top-0  ${
         menu ? "clipped pointer-events-auto" : "pointer-events-none"
       }`}>
       <div className="max-w-3xl px-4 text-white mt-24 md:mt-32 w-full flex flex-col gap-3">

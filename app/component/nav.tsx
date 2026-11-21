@@ -6,16 +6,22 @@ import React from "react";
 import Menu from "./menu";
 import { useBoundStore } from "@/store/store";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Nav() {
   const { setMenu } = useBoundStore();
+  const pathname = usePathname();
+
+  if (pathname?.startsWith("/session/")) {
+    return null;
+  }
 
   return (
-    <div className="fixed w-full pointer-events-none flex items-center justify-center ">
+    <div className="fixed w-full pointer-events-none flex items-center justify-center z-[99999] left-0">
       <div
-        className="max-w-3xl w-full md:bg-white md:border border-violet-700  h-14 md:h-22 rounded-b-3xl 
-       md:rounded-b-[6rem] flex items-center justify-between px-3 md:p-6 md:px-16 relative z-9999">
-        <Link  onClick={() => setMenu(false)}  href="/" className="pointer-events-auto">
+        className="max-w-3xl w-full bg-w md:bg-white md:border border-violet-700 h-14 md:h-22 rounded-b-3xl 
+       md:rounded-b-[6rem] flex items-center justify-between px-3 md:p-6 md:px-16 relative">
+        <Link onClick={() => setMenu(false)} href="/" className="pointer-events-auto">
           <Image
             src="/logo.svg"
             width={50}
@@ -31,10 +37,7 @@ export default function Nav() {
             className="md:hidden"
           />
         </Link>
-        <div className="hidden md:flex items-center gap-3 pointer-events-auto font-light">
-          <p className="">One-on-One</p>
-          <p className="">Academy</p>
-        </div>
+      
         <DotsThreeCircleIcon
           size={24}
           className="max-sm:inline hidden text-white cursor-pointer pointer-events-auto"
