@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 export default function Call() {
@@ -25,10 +26,10 @@ export default function Call() {
             growth back.
           </p>
           <div className="flex items-center gap-3">
-            <div className="bg-accent-pink py-3 px-6 md:px-10 rounded-full my-4">
+            <Link href="/session" className="bg-accent-pink py-3 px-6 md:px-10 rounded-full my-4">
               <p className="font-bold text-sm md:text-white md:text-xl">Book a call</p>
-            </div>
-            <div className="bg-white md:border  p-3 rounded-full">
+            </Link>
+            <Link href="/session" className="bg-white md:border  p-3 rounded-full">
               <Image
                 src="/arrow-top.svg"
                 width={24}
@@ -36,7 +37,7 @@ export default function Call() {
                 className=""
                 alt="arrow"
               />
-            </div>
+            </Link>
           </div>
         </div>
       </div>

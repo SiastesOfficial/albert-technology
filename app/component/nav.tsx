@@ -24,15 +24,15 @@ export default function Nav() {
         <Link onClick={() => setMenu(false)} href="/" className="pointer-events-auto">
           <Image
             src="/logo.svg"
-            width={50}
+            width={120}
             height={50}
             alt="logo"
             className="max-sm:hidden"
           />
           <Image
             src="/logo-w.svg"
-            width={32}
-            height={32}
+            width={120}
+            height={64}
             alt="logo"
             className="md:hidden"
           />
