@@ -56,7 +56,8 @@ export default function Home() {
                     .getElementById("fade-up")
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="py-3 bg-accent-pink text-white px-8 font-bold text-xl rounded-full cursor-pointer">
+                className="py-3 bg-accent-pink text-white px-8 font-bold text-xl rounded-full cursor-pointer"
+              >
                 Learn more
               </button>
             </div>
@@ -74,19 +75,30 @@ export default function Home() {
               </p>
             </div>
             <div className="flex justify-center gap-4 items-center w-full mt-10 ">
-              <div className=" py-2 text-accent-pink border border-accent-pink px-4 font-bold text-sm rounded-full ">
+              <Link
+                href="/session"
+                className=" py-2 text-accent-pink border border-accent-pink px-4 font-bold text-sm rounded-full "
+              >
                 Book a session
-              </div>
-              <div className="py-2 bg-accent-pink text-white px-4 font-bold text-sm rounded-full ">
+              </Link>
+              <button
+                type="button"
+                onClick={() => {
+                  document
+                    .getElementById("fade-up")
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="py-2 bg-accent-pink text-white px-4 font-bold text-sm rounded-full "
+              >
                 Learn more
-              </div>
+              </button>
             </div>
           </div>
         </div>
         <div className="w-full  bg-black md:bg-white  ">
           <FadeUp />
           <Service />
-          <Companies/>
+          <Companies />
           <Call />
         </div>
         {/* main profile */}
