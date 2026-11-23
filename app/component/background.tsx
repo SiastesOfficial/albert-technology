@@ -30,7 +30,7 @@ export default function Background() {
       <div className="absolute inset-0 bg-black/30 md:hidden flex" />
       <div className="w-full h-full absolute top-0  md:flex hidden">
         <Image
-          src="/ab-background.jpg"
+          src="/ab-3.jpg"
           fill
           loading="eager"
           alt="blur"
