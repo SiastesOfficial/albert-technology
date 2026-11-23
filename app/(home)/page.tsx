@@ -15,9 +15,9 @@ export default function Home() {
     <div className="flex flex-col flex-1 items-center justify-center  font-sans  ">
       <main className="flex flex-1 w-full 2xl:max-w-7xl max-w-4xl flex-col items-center justify-between pt-16 md:px-16   sm:items-start">
         <Background />
-        <div className="w-full h-[80vh] flex flex-col items-center ">
+        <div className="w-full h-[85vh] flex flex-col items-center ">
           <div className="w-full h-full overflow-hidden  hidden md:flex flex-col justify-end  relative">
-            <div className="w-full flex items-center justify-center">
+            <div className="w-full flex items-center justify-center mt-10">
               <Image
                 src="/grow.svg"
                 width={500}
@@ -27,15 +27,15 @@ export default function Home() {
               />
               <Image
                 src="/grow.svg"
-                width={800}
+                width={500}
                 height={300}
                 alt="hero text"
                 className="xl:block hidden"
               />
             </div>
             <div className=" w-full   flex flex-col items-center mt-8">
-              <p className="md:w-[80%] xl:w-[70%]  text-2xl text-black  text-center ">
-                I help founders and leaders start businesses on solid ground, grow them with wisdom, and stay anchored in faith while they do it. With over a decade in finance across the UK, US, and Canada, I bring practical strategy to the work of building, and the conviction that the person behind the business matters as much as the business itself.
+              <p className="md:w-[70%] xl:w-[65%]  text-2xl text-black  text-center ">
+                I help founders start strong, grow wisely, and<br/>  build the spirit man behind the business.
               </p>
             </div>
             <div className="flex gap-2 justify-center items-center mt-6">
