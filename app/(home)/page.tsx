@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import Background from "../component/background";
-import { Lottie } from "lottie-react";
-import animationData from "../../public/albert.json";
 import FadeUp from "../component/fade-up";
 import Service from "../component/service";
 import Call from "../component/call";
