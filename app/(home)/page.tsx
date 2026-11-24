@@ -16,8 +16,8 @@ export default function Home() {
       <main className="flex flex-1 w-full 2xl:max-w-7xl max-w-4xl flex-col items-center justify-between pt-16 xl:px-16   sm:items-start">
         <Background />
         <div className="w-full h-[85vh] flex flex-col items-center ">
-          <div className="w-full h-full overflow-hidden  hidden md:flex flex-col justify-end  relative">
-            <div className="w-full flex items-center justify-center mt-10">
+          <div className="w-full h-full overflow-hidden  hidden md:flex flex-col justify-end -mt-28  relative">
+            <div className="w-full flex items-center justify-center ">
               <Image
                 src="/grow.svg"
                 width={400}
@@ -34,7 +34,7 @@ export default function Home() {
               />
             </div>
             <div className=" w-full   flex flex-col items-center mt-8">
-              <p className="md:w-[70%] xl:w-[45%]  text-2xl text-black  text-center ">
+              <p className="md:w-[70%] xl:w-[45%]  text-2xl text-white  text-center ">
                 I help founders start strong, grow wisely, and build the spirit man behind the business.
               </p>
             </div>
@@ -90,7 +90,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="w-full  bg-black md:bg-white  ">
+        <div className="w-full  bg-black  ">
           <FadeUp />
           <Service />
           <Companies />

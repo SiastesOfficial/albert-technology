@@ -3,10 +3,10 @@ import React from "react";
 
 export default function Background() {
   return (
-    <div className="w-full  h-screen absolute inset-0 -z-10 max-sm:bg-black bg-white overflow-hidden flex items-center justify-center">
+    <div className="w-full  h-screen absolute inset-0 -z-10 bg-black  overflow-hidden flex items-center justify-center">
       {/* Background Video */}
       <video
-        src="/bac.mp4"
+        src="/bac-vid.mp4"
         autoPlay
         loop
         muted
@@ -17,6 +17,19 @@ export default function Background() {
         className="absolute inset-0 w-full h-full object-cover md:hidden"
       />
 
+       <video
+        src="/bac-des.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        controls={false}
+        disablePictureInPicture
+        disableRemotePlayback
+        className="absolute inset-0 w-full h-full object-cover max-sm:hidden"
+      />
+
+
       {/* Optional Dark/Tinted Background Overlay for readability */}
       <div className="w-full h-full absolute overflow-hidden">
          <Image
@@ -24,11 +37,18 @@ export default function Background() {
           fill
           loading="eager"
           alt="blur"
-          className="object-cover "
+          className="object-cover md:hidden"
+        />
+          <Image
+          src="/background-des.png"
+          fill
+          loading="eager"
+          alt="blur"
+          className="object-cover hidden md:block "
         />
       </div>
-      <div className="absolute inset-0 bg-black/30 md:hidden flex" />
-      <div className="w-full h-full absolute top-0  md:flex hidden">
+      <div className="absolute inset-0 bg-black/60  flex" />
+      {/* <div className="w-full h-full absolute top-0  md:flex hidden">
         <Image
           src="/ab-3.jpg"
           fill
@@ -36,7 +56,7 @@ export default function Background() {
           alt="blur"
           className="object-cover "
         />
-      </div>
+      </div> */}
     </div>
   );
 }

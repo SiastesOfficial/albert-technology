@@ -105,7 +105,7 @@ export default function Service() {
 
   return (
     <section className="relative z-20 my-24 flex w-full min-w-0 max-w-full flex-col items-center text-white">
-      <p className="rounded-full border border-dashed border-white/30 p-4 px-6 text-lg text-white/70 md:border-black/30 md:text-black/70">
+      <p className="rounded-full border border-dashed border-white/30 p-4 px-6 text-lg text-white/70  ">
         ways I help you grow.
       </p>
 
@@ -137,7 +137,7 @@ export default function Service() {
           onClick={() => goTo(current - 1)}
           disabled={current === 0}
           aria-label="Previous service"
-          className="pointer-events-auto size-10 rounded-full border border-white/30 transition disabled:opacity-30 md:border-black/30 md:text-black"
+          className="pointer-events-auto size-10 rounded-full border border-white/30 transition disabled:opacity-30  "
         >
           ←
         </button>
@@ -156,8 +156,8 @@ export default function Service() {
               onClick={() => goTo(i)}
               className={`h-2 rounded-full transition-all duration-300 ${
                 i === current
-                  ? "w-6 bg-white md:bg-black"
-                  : "w-2 bg-white/30 md:bg-black/30"
+                  ? "w-6 bg-white"
+                  : "w-2 bg-white/30 "
               }`}
             />
           ))}
@@ -167,7 +167,7 @@ export default function Service() {
           onClick={() => goTo(current + 1)}
           disabled={current === pages - 1}
           aria-label="Next service"
-          className="pointer-events-auto size-10 cursor-pointer rounded-full border border-white/30 transition disabled:opacity-30 md:border-black/30 md:text-black"
+          className="pointer-events-auto size-10 cursor-pointer rounded-full border border-white/30 transition disabled:opacity-30 "
         >
           →
         </button>
@@ -187,17 +187,17 @@ const Card = ({ index, title, body }: ServiceItem & { index: number }) => (
         className="md:hidden"
       />
       <Image
-        src="/clover-leaf-black.svg"
+        src="/clover-leaf.svg"
         width={200}
         height={60}
         alt=""
         className="hidden md:block"
       />
     </div>
-    <span className="text-lg text-white/40 md:text-black/40">0{index}</span>
-    <h3 className="mt-2 text-balance text-3xl font-semibold hover:text-accent-pink md:mt-6 md:text-4xl md:text-black lg:text-3xl xl:text-4xl">
+    <span className="text-lg text-white/40 ">0{index}</span>
+    <h3 className="mt-2 text-balance text-3xl font-semibold hover:text-accent-pink md:mt-6 md:text-4xl  lg:text-3xl xl:text-4xl">
       {title}
     </h3>
-    <p className="mt-6 md:mt-8 md:text-lg md:text-black">{body}</p>
+    <p className="mt-6 md:mt-8 md:text-lg ">{body}</p>
   </div>
 );

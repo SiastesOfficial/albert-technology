@@ -60,14 +60,14 @@ export default function FadeUp() {
       ref={root}
       className="flex flex-col items-center px-6 py-24 max-sm:bg-black md:py-32"
     >
-      <p className="rounded-full border border-dashed border-white/30 px-6 py-3 text-lg text-white/70 md:border-black/30 md:text-black/70">
+      <p className="rounded-full border border-dashed border-white/30 px-6 py-3 text-lg text-white/70 ">
         About
       </p>
 
       <div className="mt-12 w-full max-w-5xl md:w-[75%]">
         <p
           data-highlight
-          className="text-pretty text-start text-[26px] font-medium leading-snug text-white md:text-[38px] md:text-black"
+          className="text-pretty text-start text-[26px] font-medium leading-snug text-white md:text-[38px] "
         >
           <span className="font-bold">Albert Sarpong</span> has spent more than
           a decade in finance across the UK, US, and Canada, four years as an
@@ -86,7 +86,7 @@ export default function FadeUp() {
 
         <p
           data-highlight
-          className="mt-12 text-start text-[26px] font-bold leading-snug text-accent-pink md:mt-16 md:text-[44px] md:text-black"
+          className="mt-12 text-start text-[26px] font-bold leading-snug text-accent-pink md:mt-16 md:text-[44px] "
         >
           Innovation{" "}
           <span className="text-white md:text-accent-pink">matters</span> most
@@ -96,7 +96,7 @@ export default function FadeUp() {
 
         <dl
           data-credentials
-          className="mt-16 grid grid-cols-2 gap-x-6 gap-y-10 border-t border-white/15 pt-10 md:mt-20 lg:grid-cols-4 md:border-black/15"
+          className="mt-16 grid grid-cols-2 gap-x-6 gap-y-10 border-t border-white/15 pt-10 md:mt-20 lg:grid-cols-4 "
         >
           {credentials.map(({ value, label }) => (
             <div
@@ -104,10 +104,10 @@ export default function FadeUp() {
               data-credential
               className="flex flex-col-reverse justify-end gap-1"
             >
-              <dt className="text-sm text-white/60 md:text-black/60">
+              <dt className="text-sm text-white/60 ">
                 {label}
               </dt>
-              <dd className="text-lg font-semibold text-white md:text-xl md:text-black text-balance">
+              <dd className="text-lg font-semibold text-white md:text-xl  text-balance">
                 {value}
               </dd>
             </div>

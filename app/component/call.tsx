@@ -16,7 +16,7 @@ export default function Call() {
           className="object-fit absolute mt-[-9rem] hidden md:block"
           alt="line"
         />
-        <div className="h-full text-white md:text-black flex flex-col md:justify-end px-6 py-10 md:p-10">
+        <div className="h-full text-white  flex flex-col md:justify-end px-6 py-10 md:p-10">
           <p className="text-[32px] md:text-[48px] text-balance">
             Let’s grow your business{" "}
             <span className="text-5xl font-bold">together</span>

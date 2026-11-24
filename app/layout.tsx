@@ -77,7 +77,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`$ ${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col max-w-7xl mx-auto">
+      <body className="min-h-full flex flex-col max-w-7xl mx-auto bg-black">
         {/* dynamic island */}
         <Nav />
         {children}

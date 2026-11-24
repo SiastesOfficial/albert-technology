@@ -24,13 +24,13 @@ const STEP_COUNT = 4;
 const GENDERS = ["Male", "Female", "Prefer not to say"] as const;
 
 // Dark on mobile, light from md up. Every colour lives in these constants.
-const MUTED = "text-white/60 md:text-black/60";
-const SOFT = "text-white/80 md:text-black/80";
-const CARD = "rounded-3xl border border-[#4D4C4C] md:border-black/20";
+const MUTED = "text-white/60 ";
+const SOFT = "text-white/80 ";
+const CARD = "rounded-3xl border border-[#4D4C4C] ";
 const FIELD =
-  "mt-2 block w-full border-b border-white/30 bg-transparent py-3 text-lg text-white placeholder:text-white/30 focus:border-white focus:outline-none md:border-black/30 md:text-black md:placeholder:text-black/30 md:focus:border-black";
+  "mt-2 block w-full border-b border-white/30 bg-transparent py-3 text-lg text-white placeholder:text-white/30 focus:border-white focus:outline-none  ";
 const FOCUS_RING =
-  "peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-white md:peer-focus-visible:outline-black";
+  "peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-white ";
 
 type Booking = {
   name: string;
@@ -170,7 +170,7 @@ export function BookingFlow({ session }: { session: Session }) {
   };
 
   return (
-    <main className="relative z-30 min-h-dvh bg-black text-white md:bg-white md:text-black">
+    <main className="relative z-30 min-h-dvh bg-black text-white ">
       <div className="mx-auto flex min-h-dvh max-w-5xl flex-col">
         <header className="px-6 pt-8 lg:pt-12">
           <div className="flex items-start justify-between gap-4">
@@ -185,7 +185,7 @@ export function BookingFlow({ session }: { session: Session }) {
             <Link
               href="/#session"
               aria-label="Close booking"
-              className="text-white/80 transition hover:text-white md:text-black/80 md:hover:text-black"
+              className="text-white/80 transition hover:text-white "
             >
               <svg
                 viewBox="0 0 24 24"
@@ -213,8 +213,8 @@ export function BookingFlow({ session }: { session: Session }) {
                 key={index}
                 className={`h-0.5 flex-1 transition-colors ${
                   index <= step
-                    ? "bg-white md:bg-black"
-                    : "bg-white/20 md:bg-black/15"
+                    ? "bg-white "
+                    : "bg-white/20 "
                 }`}
               />
             ))}
@@ -270,14 +270,14 @@ export function BookingFlow({ session }: { session: Session }) {
               </div>
             </div>
 
-            <footer className="sticky bottom-0 border-t border-white/10 bg-[#1e1e1e] px-6 py-5  md:border-black/10 md:bg-neutral-100 lg:bottom-6 lg:mb-8 lg:rounded-3xl lg:border">
+            <footer className="sticky bottom-0 border-t border-white/10 bg-[#1e1e1e] px-6 py-5   lg:bottom-6 lg:mb-8 lg:rounded-3xl lg:border">
               <div className="mx-auto flex max-w-md flex-col gap-3 lg:max-w-none">
                 <div className="flex gap-3">
                   {step > 0 && (
                     <button
                       type="button"
                       onClick={() => setStep(step - 1)}
-                      className="rounded-full border border-white/30 px-6 py-4 font-semibold transition hover:bg-white/10 md:border-black/30 md:hover:bg-black/5"
+                      className="rounded-full border border-white/30 px-6 py-4 font-semibold transition "
                     >
                       Back
                     </button>
@@ -287,8 +287,8 @@ export function BookingFlow({ session }: { session: Session }) {
                     disabled={!ready || status === "loading"}
                     className={`flex-1 rounded-full border py-4 font-semibold transition disabled:cursor-not-allowed disabled:opacity-40 ${
                       isLast
-                        ? "border-white bg-white text-black enabled:hover:bg-white/85 md:border-black md:bg-black md:text-white md:enabled:hover:bg-black/85"
-                        : "border-white/60 enabled:hover:bg-white enabled:hover:text-black md:border-black/60 md:enabled:hover:bg-black md:enabled:hover:text-white"
+                        ? "border-white bg-white text-black enabled:hover:bg-white/85 "
+                        : "border-white/60 enabled:hover:bg-white enabled:hover:text-black "
                     }`}
                   >
                     {isLast
@@ -328,14 +328,14 @@ function SessionSummary({ session }: { session: Session }) {
     >
       <p className={`text-sm ${MUTED}`}>Consultation call</p>
       <p className="mt-1 text-xl font-semibold">{session.title}</p>
-      <p className="mt-1 text-sm text-white/70 md:text-black/70">
+      <p className="mt-1 text-sm text-white/70 ">
         {`${lengths.length > 1 ? "From " : ""}${formatPrice(
           priceFor(session, lengths[0].minutes),
         )} · ${lengths.map(({ minutes }) => minutes).join(" or ")} minutes`}
       </p>
       <p className={`mt-3 text-sm ${MUTED}`}>{session.audience}</p>
 
-      <div className="my-5 border-t border-white/10 md:border-black/10" />
+      <div className="my-5 border-t border-white/10 " />
 
       <p className="font-semibold">Includes</p>
       <ul className="mt-3 space-y-3 pr-10">
@@ -361,7 +361,7 @@ function SessionSummary({ session }: { session: Session }) {
       </ul>
 
       {session.note && (
-        <p className="mt-5 text-xs text-white/50 md:text-black/50">
+        <p className="mt-5 text-xs text-white/50 ">
           {session.note}
         </p>
       )}
@@ -474,7 +474,7 @@ function StepTime({
     <>
       <Field label="Day">
         <input
-          className={`${FIELD} [color-scheme:dark] md:[color-scheme:light]`}
+          className={`${FIELD} [color-scheme:dark] `}
           type="date"
           min={today}
           value={booking.date}
@@ -518,7 +518,7 @@ function StepLength({
                 onChange={() => update("minutes", minutes)}
               />
               <div
-                className={`${CARD} flex cursor-pointer items-center justify-between gap-6 p-5 transition peer-checked:border-white peer-checked:bg-white/5 md:peer-checked:border-black md:peer-checked:bg-black/5 ${FOCUS_RING}`}
+                className={`${CARD} flex cursor-pointer items-center justify-between gap-6 p-5 transition peer-checked:border-white peer-checked:bg-white/5 ${FOCUS_RING}`}
               >
                 <div>
                   <p className="font-semibold">{minutes} minutes</p>
@@ -534,7 +534,7 @@ function StepLength({
       </fieldset>
 
       <dl
-        className={`${CARD} divide-y divide-white/10 px-6 md:divide-black/10`}
+        className={`${CARD} divide-y divide-white/10 px-6 `}
       >
         <Row term="Name" detail={booking.name} />
         <Row term="Email" detail={booking.email} />
@@ -567,7 +567,7 @@ function Field({
       <span className="text-base font-semibold">
         {label}
         {optional && (
-          <span className="ml-1 font-normal text-white/50 md:text-black/50">
+          <span className="ml-1 font-normal text-white/50 ">
             (optional)
           </span>
         )}
@@ -605,7 +605,7 @@ function ChipGroup({
               className="peer sr-only"
             />
             <span
-              className={`block cursor-pointer rounded-full bg-white px-4 py-2 text-sm text-black transition peer-checked:bg-accent-pink peer-checked:text-white md:bg-black md:text-white md:peer-checked:bg-accent-pink md:peer-checked:text-white ${FOCUS_RING}`}
+              className={`block cursor-pointer rounded-full bg-white px-4 py-2 text-sm text-black transition peer-checked:bg-accent-pink peer-checked:text-white  ${FOCUS_RING}`}
             >
               {option}
             </span>

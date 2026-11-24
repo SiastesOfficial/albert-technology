@@ -95,11 +95,11 @@ const chapters: Chapter[] = [
 
 const COLUMN = "w-full px-4 md:w-[80%] xl:w-[70%]";
 const BODY =
-  "text-lg leading-relaxed text-white/80 md:text-xl md:text-black/80";
+  "text-lg leading-relaxed text-white/80 md:text-xl ";
 
 export default function Business() {
   return (
-    <div className="mx-auto flex w-full max-w-4xl flex-col items-center bg-black max-sm:py-32 max-sm:text-white md:bg-white md:py-38 2xl:max-w-7xl">
+    <div className="mx-auto flex w-full max-w-4xl flex-col items-center bg-black max-sm:py-32 text-white  md:py-38 2xl:max-w-7xl">
       <h2 className={`${COLUMN} text-pretty text-xl leading-snug md:text-2xl`}>
         <span className="font-semibold text-accent-pink">Siastes Group</span>{" "}
         {intro}
@@ -154,7 +154,7 @@ export default function Business() {
               <ol className="mt-8 space-y-8">
                 {principles.map(({ title, body }, index) => (
                   <li key={title} className="flex gap-5">
-                    <span className="text-lg text-white/40 md:text-black/40">
+                    <span className="text-lg text-white/40 ">
                       0{index + 1}
                     </span>
                     <div>
@@ -172,8 +172,7 @@ export default function Business() {
 
         <Link
           href="/#session"
-          className="inline-block rounded-full bg-white px-8 py-4 font-bold text-black transition hover:bg-white/85 md:bg-black md:text-white md:hover:bg-black/85"
-        >
+          className="inline-block rounded-full bg-white px-8 py-4 font-bold text-black transition hover:bg-white/85  ">
           Book a session
         </Link>
       </div>

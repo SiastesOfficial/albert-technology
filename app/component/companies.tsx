@@ -40,7 +40,7 @@ export default function Companies() {
       id="companies"
       className="my-12 mt-24 flex flex-col items-center px-6 md:my-24 md:mt-32"
     >
-      <h2 className="rounded-full border border-dashed border-white/30 p-4 px-6 md:text-lg font-normal text-white/70 md:border-black/30 md:text-black/70">
+      <h2 className="rounded-full border border-dashed border-white/30 p-4 px-6 md:text-lg font-normal text-white/70 ">
         Companies growing under me
       </h2>
 
@@ -68,11 +68,11 @@ export default function Companies() {
 
 const CompanyCard = ({ name, tag, brief, featured, logo }: Company) => (
   <article
-    className={`relative h-full overflow-hidden rounded-4xl border border-[#4D4C4C] p-6 pb-24 text-white md:p-8 md:pb-24 md:text-black md:border-black/20 ${
+    className={`relative h-full overflow-hidden rounded-4xl border border-[#4D4C4C] p-6 pb-24 text-white md:p-8 md:pb-24  ${
       featured ? "min-h-64 md:min-h-72" : "min-h-72"
     }`}
   >
-    <p className="text-sm text-white/60 md:text-black/60">{tag}</p>
+    <p className="text-sm text-white/60 ">{tag}</p>
     <h3
       className={`mt-2 font-semibold ${
         featured ? "text-4xl md:text-5xl" : "text-2xl"
@@ -81,14 +81,14 @@ const CompanyCard = ({ name, tag, brief, featured, logo }: Company) => (
       {name}
     </h3>
     <p
-      className={`mt-4 text-white/80 md:text-black/80 ${
+      className={`mt-4 text-white/80  ${
         featured ? "max-w-xl text-xl md:text-2xl" : "text-lg"
       }`}
     >
       {brief}
     </p>
 
-    <div className="absolute bottom-6 right-6 flex size-14 items-center justify-center rounded-full overflow-hidden  border border-white/30 md:border-black/30  md:bottom-8 md:right-8">
+    <div className="absolute bottom-6 right-6 flex size-14 items-center justify-center rounded-full overflow-hidden  border border-white/30   md:bottom-8 md:right-8">
       <Image src={logo} fill alt="" />
     </div>
   </article>

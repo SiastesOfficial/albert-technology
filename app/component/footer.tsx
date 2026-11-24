@@ -3,8 +3,8 @@ import Link from "next/link";
 import { sessions } from "../session/sessionsData";
 
 const LINK =
-  "text-white/60 transition hover:text-white hover:underline md:text-black/60 md:hover:text-black";
-const HAIRLINE = "border-white/15 md:border-black/15";
+  "text-white/60 transition hover:text-white hover:underline  ";
+const HAIRLINE = "border-white/15";
 
 const columns = [
   {
@@ -57,7 +57,7 @@ const socials = [
 export default function Footer() {
   return (
     <footer
-      className={`border-t bg-black text-[#f5f5f7] md:bg-white md:text-[#1d1d1f]  md:mt-24 ${HAIRLINE}`}
+      className={`border-t bg-black text-[#f5f5f7]  md:mt-24 ${HAIRLINE}`}
     >
       <div className="mx-auto max-w-5xl px-6 pb-8 pt-16 md:pt-20">
         <div className={`flex flex-col gap-3 border-b pb-10 ${HAIRLINE} items-start`}>
@@ -69,7 +69,7 @@ export default function Footer() {
             className=" w-auto md:hidden"
           />
           <Image
-            src="/logo.svg"
+            src="/logo-w.svg"
             width={700}
             height={300}
             alt="Albert Sarpong"
@@ -127,7 +127,7 @@ export default function Footer() {
         </nav>
 
         <div
-          className={`flex flex-col gap-3 border-t pt-5 text-xs text-white/60 md:flex-row md:items-center md:justify-between md:text-black/60 ${HAIRLINE}`}
+          className={`flex flex-col gap-3 border-t pt-5 text-xs text-white/60 md:flex-row md:items-center md:justify-between ${HAIRLINE}`}
         >
           <p>
             Copyright © {new Date().getFullYear()} Albert Sarpong. All rights
